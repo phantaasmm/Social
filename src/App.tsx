@@ -4,6 +4,8 @@ import { AppShell } from "./components/layout/AppShell";
 import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 import { PublicOnlyRoute } from "./features/auth/PublicOnlyRoute";
 import { CommunitiesPage } from "./pages/CommunitiesPage";
+import { CommunityDetailPage } from "./pages/CommunityDetailPage";
+import { CreateCommunityPage } from "./pages/CreateCommunityPage";
 import { CreatePage } from "./pages/CreatePage";
 import { HomePage } from "./pages/HomePage";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -34,6 +36,11 @@ export function App() {
           <Route path="search" element={<SearchPage />} />
           <Route path="create" element={<CreatePage />} />
           <Route path="communities" element={<CommunitiesPage />} />
+          <Route path="communities/new" element={<CreateCommunityPage />} />
+          <Route
+            path="communities/:slug"
+            element={<CommunityDetailPage />}
+          />
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
