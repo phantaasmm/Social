@@ -3,9 +3,9 @@ import { useProfile } from "../../features/profile/use-profile";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui";
 
 const readinessItems = [
-  "Responsive navigation",
-  "Light and dark themes",
-  "Shared UI components",
+  "Verified people search",
+  "Friend requests",
+  "Private-profile awareness",
 ];
 
 export function RightRail() {
@@ -21,7 +21,7 @@ export function RightRail() {
           <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <ShieldCheck size={21} aria-hidden="true" />
           </div>
-          <CardTitle className="text-h3">Account ready</CardTitle>
+          <CardTitle className="text-h3">Trusted network</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-3">
