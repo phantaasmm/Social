@@ -9,6 +9,7 @@ import { App } from "./App";
 import { ToastProvider } from "./components/ui";
 import { AuthProvider } from "./features/auth/AuthProvider";
 import { CommunitiesProvider } from "./features/communities/CommunitiesProvider";
+import { FeedProvider } from "./features/feed/FeedProvider";
 import { FriendshipsProvider } from "./features/friends/FriendshipsProvider";
 import { ProfileProvider } from "./features/profile/ProfileProvider";
 import "./index.css";
@@ -23,7 +24,9 @@ createRoot(document.getElementById("root")!).render(
             <ProfileProvider>
               <FriendshipsProvider>
                 <CommunitiesProvider>
-                  <App />
+                  <FeedProvider>
+                    <App />
+                  </FeedProvider>
                 </CommunitiesProvider>
               </FriendshipsProvider>
             </ProfileProvider>

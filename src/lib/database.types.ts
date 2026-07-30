@@ -132,6 +132,126 @@ export interface Database {
           },
         ];
       };
+      posts: {
+        Row: {
+          id: string;
+          author_id: string;
+          type: "text" | "image" | "video" | "poll" | "question";
+          content: string | null;
+          media_url: string | null;
+          visibility: "public" | "friends" | "organisation";
+          organisation_domain: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          author_id: string;
+          type: "text" | "image" | "video" | "poll" | "question";
+          content?: string | null;
+          media_url?: string | null;
+          visibility: "public" | "friends" | "organisation";
+          organisation_domain?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          author_id?: string;
+          type?: "text" | "image" | "video" | "poll" | "question";
+          content?: string | null;
+          media_url?: string | null;
+          visibility?: "public" | "friends" | "organisation";
+          organisation_domain?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      poll_options: {
+        Row: {
+          id: string;
+          post_id: string;
+          option_text: string;
+          position: number;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          option_text: string;
+          position: number;
+        };
+        Update: {
+          id?: string;
+          post_id?: string;
+          option_text?: string;
+          position?: number;
+        };
+        Relationships: [];
+      };
+      poll_votes: {
+        Row: {
+          id: string;
+          post_id: string;
+          option_id: string;
+          voter_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          option_id: string;
+          voter_id: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          post_id?: string;
+          option_id?: string;
+          voter_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      comments: {
+        Row: {
+          id: string;
+          post_id: string;
+          author_id: string;
+          content: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          author_id: string;
+          content: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          post_id?: string;
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      post_likes: {
+        Row: {
+          post_id: string;
+          user_id: string;
+          created_at: string;
+        };
+        Insert: {
+          post_id: string;
+          user_id: string;
+          created_at?: string;
+        };
+        Update: {
+          post_id?: string;
+          user_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -149,3 +269,11 @@ export type Community =
   Database["public"]["Tables"]["communities"]["Row"];
 export type CommunityMember =
   Database["public"]["Tables"]["community_members"]["Row"];
+export type Post = Database["public"]["Tables"]["posts"]["Row"];
+export type PollOption =
+  Database["public"]["Tables"]["poll_options"]["Row"];
+export type PollVote =
+  Database["public"]["Tables"]["poll_votes"]["Row"];
+export type Comment = Database["public"]["Tables"]["comments"]["Row"];
+export type PostLike =
+  Database["public"]["Tables"]["post_likes"]["Row"];
