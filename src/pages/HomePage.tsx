@@ -10,7 +10,7 @@ export function HomePage() {
     <section aria-labelledby="home-title">
       <PageHeader
         id="home-title"
-        eyebrow="Milestone 1"
+        eyebrow="Your network"
         title="Home"
         description="Your trusted feed will bring updates from friends and verified communities together."
       />
@@ -24,8 +24,8 @@ export function HomePage() {
             leftIcon={<Bell size={18} aria-hidden="true" />}
             onClick={() =>
               toast({
-                title: "The foundation is working",
-                description: "Toast notifications are ready for future actions.",
+                title: "You’re signed in",
+                description: "Your verified account is ready for the next milestone.",
                 variant: "success",
               })
             }

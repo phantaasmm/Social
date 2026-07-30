@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "../../lib/cn";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";
@@ -44,6 +44,10 @@ export function Avatar({
 }: AvatarProps) {
   const [hasImageError, setHasImageError] = useState(false);
   const showImage = src && !hasImageError;
+
+  useEffect(() => {
+    setHasImageError(false);
+  }, [src]);
 
   return (
     <span

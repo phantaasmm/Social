@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@supabase/supabase-js": "^2.111.0",
     "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

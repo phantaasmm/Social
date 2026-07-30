@@ -3,6 +3,8 @@ export * from "./Button";
 export * from "./Card";
 export * from "./Input";
 export * from "./Modal";
+export * from "./Switch";
 export * from "./Tabs";
+export * from "./Textarea";
 export * from "./ToastProvider";
 export * from "./use-toast";
