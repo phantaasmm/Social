@@ -331,6 +331,7 @@ export function ProfilePage() {
                     ref={fileInputRef}
                     type="file"
                     className="sr-only"
+                    aria-label="Choose a new profile photo"
                     accept="image/jpeg,image/png,image/webp,image/gif"
                     onChange={handleAvatarSelection}
                   />

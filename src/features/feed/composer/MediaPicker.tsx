@@ -91,6 +91,7 @@ export function MediaPicker({
         ref={inputRef}
         type="file"
         className="sr-only"
+        aria-label={`Choose ${type} to upload`}
         accept={
           type === "image"
             ? "image/jpeg,image/png,image/webp,image/gif"
@@ -114,6 +115,7 @@ export function MediaPicker({
               src={previewUrl}
               controls
               preload="metadata"
+              aria-label="Selected video upload preview"
               className="max-h-80 w-full bg-black object-contain"
             />
           )}

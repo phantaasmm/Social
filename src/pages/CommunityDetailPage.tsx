@@ -5,6 +5,7 @@ import {
   Building2,
   LockKeyhole,
   LogOut,
+  RefreshCw,
   ShieldCheck,
   UserPlus,
   UsersRound,
@@ -39,6 +40,8 @@ export function CommunityDetailPage() {
   const {
     communities,
     isLoading,
+    error: communitiesError,
+    refreshCommunities,
     getMembership,
     joinCommunity,
     leaveCommunity,
@@ -205,6 +208,34 @@ export function CommunityDetailPage() {
     );
   }
 
+  if (communitiesError) {
+    return (
+      <section aria-labelledby="community-error-title">
+        <PageHeader
+          id="community-error-title"
+          title="Community unavailable"
+          description="This community could not be loaded right now."
+        />
+        <Card className="rounded-none border-x-0 sm:rounded-card sm:border-x">
+          <CardContent className="flex min-h-72 flex-col items-center justify-center p-6 text-center">
+            <AlertCircle size={30} className="text-danger" aria-hidden="true" />
+            <p className="mt-4 max-w-md text-small leading-6 text-muted">
+              {communitiesError}
+            </p>
+            <Button
+              className="mt-5"
+              variant="secondary"
+              leftIcon={<RefreshCw size={17} aria-hidden="true" />}
+              onClick={() => void refreshCommunities()}
+            >
+              Try again
+            </Button>
+          </CardContent>
+        </Card>
+      </section>
+    );
+  }
+
   if (!community) {
     return (
       <section aria-labelledby="community-not-found-title">
@@ -218,7 +249,7 @@ export function CommunityDetailPage() {
             <Building2 size={30} className="text-muted" aria-hidden="true" />
             <Link
               to="/communities"
-              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-small font-semibold text-primary-foreground"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-small font-semibold text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <ArrowLeft size={17} aria-hidden="true" />
               Browse communities

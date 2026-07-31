@@ -60,7 +60,7 @@ export function AudiencePicker({
             <label
               key={option.value}
               className={cn(
-                "flex min-h-16 cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors",
+                "flex min-h-16 cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
                 isSelected
                   ? "border-primary bg-primary/10"
                   : "border-border bg-surface hover:bg-surface-2",

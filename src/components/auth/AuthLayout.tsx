@@ -23,7 +23,13 @@ const trustPoints = [
 
 export function AuthLayout() {
   return (
-    <div className="min-h-screen bg-background lg:grid lg:grid-cols-[minmax(360px,0.85fr)_minmax(520px,1.15fr)]">
+    <div className="min-h-screen overflow-x-clip bg-background lg:grid lg:grid-cols-[minmax(360px,0.85fr)_minmax(520px,1.15fr)]">
+      <a
+        href="#auth-main"
+        className="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-surface px-4 py-2 text-small font-semibold text-foreground shadow-lg transition-transform focus:translate-y-0"
+      >
+        Skip to main content
+      </a>
       <aside className="relative hidden min-h-screen overflow-hidden bg-primary p-10 text-white lg:flex lg:flex-col xl:p-14">
         <div
           className="absolute -right-28 -top-28 h-80 w-80 rounded-full border border-white/15 bg-white/5"
@@ -40,7 +46,7 @@ export function AuthLayout() {
           </span>
           <span>
             <span className="block text-h3 font-bold">CommonGround</span>
-            <span className="block text-xs text-white/70">
+            <span className="block text-xs text-white/85">
               Trust starts with verification
             </span>
           </span>
@@ -56,7 +62,7 @@ export function AuthLayout() {
             <br />
             Real communities.
           </h1>
-          <p className="mt-5 max-w-md text-body leading-7 text-white/75">
+          <p className="mt-5 max-w-md text-body leading-7 text-white/85">
             Connect through the official email that belongs to your college or
             company.
           </p>
@@ -72,7 +78,7 @@ export function AuthLayout() {
                   </span>
                   <div>
                     <p className="text-small font-semibold">{point.title}</p>
-                    <p className="mt-0.5 text-small text-white/65">
+                    <p className="mt-0.5 text-small text-white/80">
                       {point.description}
                     </p>
                   </div>
@@ -82,12 +88,12 @@ export function AuthLayout() {
           </div>
         </div>
 
-        <p className="relative z-10 text-xs text-white/55">
+        <p className="relative z-10 text-xs text-white/80">
           Built for verified college and company networks.
         </p>
       </aside>
 
-      <main className="relative flex min-h-screen flex-col">
+      <main id="auth-main" className="relative flex min-h-screen flex-col">
         <div className="flex h-16 items-center justify-between border-b border-border px-4 sm:px-8 lg:border-b-0">
           <Brand className="lg:hidden" />
           <div className="ml-auto">

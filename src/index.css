@@ -16,6 +16,14 @@
   --success: #16a34a;
   --danger: #dc2626;
   --ring: #6366f1;
+  --primary-text: #4f46e5;
+  --primary-action: #4f46e5;
+  --primary-action-hover: #4338ca;
+  --accent-text: #0369a1;
+  --success-text: #15803d;
+  --danger-text: #dc2626;
+  --danger-action: #dc2626;
+  --danger-action-hover: #b91c1c;
 }
 
 .dark {
@@ -32,6 +40,14 @@
   --success: #22c55e;
   --danger: #ef4444;
   --ring: #818cf8;
+  --primary-text: #818cf8;
+  --primary-action: #5b5bd6;
+  --primary-action-hover: #4f46e5;
+  --accent-text: #38bdf8;
+  --success-text: #22c55e;
+  --danger-text: #f87171;
+  --danger-action: #dc2626;
+  --danger-action-hover: #b91c1c;
 }
 
 @layer base {
@@ -53,6 +69,16 @@
     line-height: 1.5;
   }
 
+  #root {
+    min-height: 100vh;
+    min-width: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
   button,
   input,
   textarea,
@@ -67,6 +93,34 @@
 }
 
 @layer utilities {
+  .text-primary {
+    color: var(--primary-text);
+  }
+
+  .text-accent {
+    color: var(--accent-text);
+  }
+
+  .text-success {
+    color: var(--success-text);
+  }
+
+  .text-danger {
+    color: var(--danger-text);
+  }
+
+  .bg-primary {
+    background-color: var(--primary-action);
+  }
+
+  .bg-danger {
+    background-color: var(--danger-action);
+  }
+
+  .hover\:bg-primary-hover:hover {
+    background-color: var(--primary-action-hover);
+  }
+
   .theme-changing,
   .theme-changing *,
   .theme-changing *::before,

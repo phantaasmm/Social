@@ -1,9 +1,11 @@
 import {
+  AlertCircle,
   Check,
   Clock3,
   Gamepad2,
   History,
   Play,
+  RefreshCw,
   Swords,
 } from "lucide-react";
 import { useState } from "react";
@@ -63,6 +65,9 @@ export function ChessPanel() {
     outgoingChallenges,
     activeGames,
     finishedGames,
+    isLoading,
+    error,
+    refreshGames,
     getOpponentProfile,
     acceptChallenge,
   } = useChess();
@@ -134,6 +139,48 @@ export function ChessPanel() {
     outgoingChallenges.length > 0 ||
     activeGames.length > 0 ||
     finishedGames.length > 0;
+
+  if (isLoading) {
+    return (
+      <div
+        className="space-y-3 px-4 pb-1 sm:px-5"
+        role="status"
+        aria-label="Loading chess games"
+      >
+        <span className="sr-only">Loading chess games…</span>
+        {[0, 1, 2].map((item) => (
+          <div
+            key={item}
+            className="h-20 animate-pulse rounded-card bg-surface-2"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-72 flex-col items-center justify-center px-6 py-12 text-center">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-danger/10 text-danger">
+          <AlertCircle size={27} aria-hidden="true" />
+        </span>
+        <h2 className="mt-4 text-h3 text-foreground">
+          Chess games unavailable
+        </h2>
+        <p className="mt-1 max-w-sm text-small leading-6 text-muted">
+          {error}
+        </p>
+        <Button
+          className="mt-5"
+          variant="secondary"
+          leftIcon={<RefreshCw size={17} aria-hidden="true" />}
+          onClick={() => void refreshGames()}
+        >
+          Try again
+        </Button>
+      </div>
+    );
+  }
 
   if (!hasGames) {
     return (

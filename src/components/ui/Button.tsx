@@ -23,7 +23,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   secondary:
     "border border-border bg-surface text-foreground shadow-sm hover:bg-surface-2",
   ghost: "bg-transparent text-foreground hover:bg-surface-2",
-  destructive: "bg-danger text-white shadow-sm hover:brightness-110",
+  destructive:
+    "bg-danger text-white shadow-sm hover:bg-[var(--danger-action-hover)]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
