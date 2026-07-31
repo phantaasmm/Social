@@ -2,6 +2,8 @@ import { AlertCircle, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { PageHeader } from "../components/layout/PageHeader";
 import { Button, Tabs } from "../components/ui";
+import { ChessPanel } from "../features/chess/ChessPanel";
+import { useChess } from "../features/chess/use-chess";
 import { FriendsPanel } from "../features/friends/FriendsPanel";
 import { PeopleSearchPanel } from "../features/friends/PeopleSearchPanel";
 import { RequestsPanel } from "../features/friends/RequestsPanel";
@@ -16,6 +18,7 @@ export function SearchPage() {
     error,
     refreshFriendships,
   } = useFriendships();
+  const { incomingChallenges } = useChess();
   const [activeTab, setActiveTab] = useState("discover");
   const requestCount = incomingRequests.length + outgoingRequests.length;
 
@@ -37,6 +40,14 @@ export function SearchPage() {
           ? `Friends (${acceptedFriendships.length})`
           : "Friends",
       content: <FriendsPanel onFindPeople={() => setActiveTab("discover")} />,
+    },
+    {
+      id: "chess",
+      label:
+        incomingChallenges.length > 0
+          ? `Chess (${incomingChallenges.length})`
+          : "Chess",
+      content: <ChessPanel />,
     },
   ];
 

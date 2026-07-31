@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { ToastProvider } from "./components/ui";
 import { AuthProvider } from "./features/auth/AuthProvider";
+import { ChessProvider } from "./features/chess/ChessProvider";
 import { CommunitiesProvider } from "./features/communities/CommunitiesProvider";
 import { FeedProvider } from "./features/feed/FeedProvider";
 import { FriendshipsProvider } from "./features/friends/FriendshipsProvider";
@@ -23,11 +24,13 @@ createRoot(document.getElementById("root")!).render(
           <AuthProvider>
             <ProfileProvider>
               <FriendshipsProvider>
-                <CommunitiesProvider>
-                  <FeedProvider>
-                    <App />
-                  </FeedProvider>
-                </CommunitiesProvider>
+                <ChessProvider>
+                  <CommunitiesProvider>
+                    <FeedProvider>
+                      <App />
+                    </FeedProvider>
+                  </CommunitiesProvider>
+                </ChessProvider>
               </FriendshipsProvider>
             </ProfileProvider>
           </AuthProvider>

@@ -1,7 +1,9 @@
-import { UserMinus, UsersRound } from "lucide-react";
+import { Play, Swords, UserMinus, UsersRound } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Modal, useToast } from "../../components/ui";
 import type { Friendship } from "../../lib/database.types";
+import { useChess } from "../chess/use-chess";
 import { PersonRow } from "./PersonRow";
 import { useFriendships } from "./use-friendships";
 
@@ -15,10 +17,15 @@ export function FriendsPanel({ onFindPeople }: FriendsPanelProps) {
     getOtherProfile,
     deleteFriendship,
   } = useFriendships();
+  const { challengeFriend, getGameWith } = useChess();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [selectedFriendship, setSelectedFriendship] =
     useState<Friendship | null>(null);
   const [isRemoving, setIsRemoving] = useState(false);
+  const [challengingProfileId, setChallengingProfileId] = useState<
+    string | null
+  >(null);
 
   const selectedProfile = selectedFriendship
     ? getOtherProfile(selectedFriendship)
@@ -49,6 +56,30 @@ export function FriendsPanel({ onFindPeople }: FriendsPanelProps) {
       });
     } finally {
       setIsRemoving(false);
+    }
+  };
+
+  const handleChallenge = async (profileId: string) => {
+    setChallengingProfileId(profileId);
+
+    try {
+      await challengeFriend(profileId);
+      toast({
+        title: "Chess challenge sent",
+        description: "Your friend will see it in their Chess tab.",
+        variant: "success",
+      });
+    } catch (challengeError) {
+      toast({
+        title: "Could not send challenge",
+        description:
+          challengeError instanceof Error
+            ? challengeError.message
+            : "Please try again.",
+        variant: "error",
+      });
+    } finally {
+      setChallengingProfileId(null);
     }
   };
 
@@ -86,19 +117,45 @@ export function FriendsPanel({ onFindPeople }: FriendsPanelProps) {
               return null;
             }
 
+            const currentGame = getGameWith(profile.id);
+
             return (
               <PersonRow
                 key={friendship.id}
                 profile={profile}
                 context="Friend"
                 action={
-                  <Button
-                    variant="ghost"
-                    leftIcon={<UserMinus size={17} aria-hidden="true" />}
-                    onClick={() => setSelectedFriendship(friendship)}
-                  >
-                    Remove
-                  </Button>
+                  <>
+                    {currentGame ? (
+                      <Button
+                        variant="secondary"
+                        leftIcon={<Play size={17} aria-hidden="true" />}
+                        onClick={() => navigate(`/chess/${currentGame.id}`)}
+                      >
+                        {currentGame.status === "active"
+                          ? "Open game"
+                          : "View challenge"}
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="secondary"
+                        leftIcon={<Swords size={17} aria-hidden="true" />}
+                        isLoading={challengingProfileId === profile.id}
+                        onClick={() => void handleChallenge(profile.id)}
+                      >
+                        Challenge to chess
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Remove ${profile.display_name || profile.username} as a friend`}
+                      title="Remove friend"
+                      onClick={() => setSelectedFriendship(friendship)}
+                    >
+                      <UserMinus size={17} aria-hidden="true" />
+                    </Button>
+                  </>
                 }
               />
             );

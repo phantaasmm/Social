@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 import { PublicOnlyRoute } from "./features/auth/PublicOnlyRoute";
 import { CommunitiesPage } from "./pages/CommunitiesPage";
 import { CommunityDetailPage } from "./pages/CommunityDetailPage";
+import { ChessGamePage } from "./pages/ChessGamePage";
 import { CreateCommunityPage } from "./pages/CreateCommunityPage";
 import { CreatePage } from "./pages/CreatePage";
 import { HomePage } from "./pages/HomePage";
@@ -41,6 +42,7 @@ export function App() {
             path="communities/:slug"
             element={<CommunityDetailPage />}
           />
+          <Route path="chess/:gameId" element={<ChessGamePage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>

@@ -252,6 +252,67 @@ export interface Database {
         };
         Relationships: [];
       };
+      games: {
+        Row: {
+          id: string;
+          white_player_id: string;
+          black_player_id: string;
+          fen: string;
+          pgn: string;
+          turn: "w" | "b";
+          status: "pending" | "active" | "finished";
+          winner_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          white_player_id: string;
+          black_player_id: string;
+          fen: string;
+          pgn: string;
+          turn?: "w" | "b";
+          status?: "pending" | "active" | "finished";
+          winner_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          white_player_id?: string;
+          black_player_id?: string;
+          fen?: string;
+          pgn?: string;
+          turn?: "w" | "b";
+          status?: "pending" | "active" | "finished";
+          winner_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "games_white_player_id_fkey";
+            columns: ["white_player_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "games_black_player_id_fkey";
+            columns: ["black_player_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "games_winner_id_fkey";
+            columns: ["winner_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -277,3 +338,4 @@ export type PollVote =
 export type Comment = Database["public"]["Tables"]["comments"]["Row"];
 export type PostLike =
   Database["public"]["Tables"]["post_likes"]["Row"];
+export type Game = Database["public"]["Tables"]["games"]["Row"];
